@@ -2,9 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Función para limpiar la pantalla
-void limpiarPantalla() 
-{ system("clear"); }
+// Función para limpiar la pantall
+void limpiarPantalla() { system("clear"); }
 
 void presioneTeclaParaContinuar() {
   puts("Presione una tecla para continuar...");
@@ -40,7 +39,8 @@ void mostrar_lista_pacientes(List *pacientes) {
 
 int main() {
   char opcion;
-  List *pacientes = list_create(); // puedes usar una lista para gestionar los pacientes
+  List *pacientes =
+      list_create(); // puedes usar una lista para gestionar los pacientes
 
   do {
     mostrarMenuPrincipal();
