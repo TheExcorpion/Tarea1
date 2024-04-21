@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MAX 50
+
 typedef struct tipoPaciente {
   int prioridad;
   char nombre[MAX];
@@ -46,14 +48,33 @@ void mostrarMenuPrincipal() {
 
 void registrar_paciente(List *pacientes)
 {
-  limpiarPantalla();
+  printf("\nRegistrar nuevo paciente \n");
+  tipoPaciente *paciente = malloc(sizeof(tipoPaciente));
+  if (paciente == NULL)
+  {
+    printf("ERROR DE MEMORIA");
+    return;
+  }
   
-  char nombre[50];
-  int edad;
+  printf("Ingresa el nombre del paciente: \n");
+  getchar();
+  char nombreIngresado[MAX];
+  scanf(" %[^\n]", nombreIngresado);
+  strMay(nombreIngresado);
+
+  bool encontPaciente = false;
+  tipoPaciente *pacienteActual = list_first(listaPacientes);
+  while (pacienteActual != NULL && !encontPaciente) 
+  {
+    if (strcmp(pacienteActual->nombre, nombreIngresado) == 0)
+    {
+      puts("El paciente ya se encuentra registrado");
+      encontPaciente = true;
+      return;
+    } else
+      pacienteActual = list_next(listaPacientes);
+  }
   
-  
-  printf("Registrar nuevo paciente\n");
-  // Aquí implementarías la lógica para registrar un nuevo paciente
 }
 
 void mostrar_lista_pacientes(List *pacientes) {
