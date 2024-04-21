@@ -2,8 +2,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct tipoPaciente {
+  int prioridad;
+  char nombre[MAX];
+  int edad;
+  char sintoma[MAX];
+  time_t hora;
+} tipoPaciente;
+
+int totalPacientes = 0;
+
 // Función para limpiar la pantall
 void limpiarPantalla() { system("clear"); }
+
+void strMay(char *cadena) {
+  int i = 0;
+  while (cadena[i] != '\0') {
+    cadena[i] = toupper(cadena[i]);
+    i++;
+  }
+}
 
 void presioneTeclaParaContinuar() {
   puts("Presione una tecla para continuar...");
@@ -26,7 +44,14 @@ void mostrarMenuPrincipal() {
   puts("6) Salir");
 }
 
-void registrar_paciente(List *pacientes) {
+void registrar_paciente(List *pacientes)
+{
+  limpiarPantalla();
+  
+  char nombre[50];
+  int edad;
+  
+  
   printf("Registrar nuevo paciente\n");
   // Aquí implementarías la lógica para registrar un nuevo paciente
 }
