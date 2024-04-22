@@ -17,9 +17,11 @@ int totalPacientes = 0;
 // Función para limpiar la pantall
 void limpiarPantalla() { system("clear"); }
 
-void strMay(char *cadena) {
+void strMay(char *cadena) 
+{
   int i = 0;
-  while (cadena[i] != '\0') {
+  while (cadena[i] != '\0')
+    {
     cadena[i] = toupper(cadena[i]);
     i++;
   }
@@ -27,8 +29,8 @@ void strMay(char *cadena) {
 
 void presioneTeclaParaContinuar() {
   puts("Presione una tecla para continuar...");
-  getchar(); // Consume el '\n' del buffer de entrada
-  getchar(); // Espera a que el usuario presione una tecla
+  getchar(); 
+  getchar();
 }
 
 // Menú principal
@@ -45,6 +47,12 @@ void mostrarMenuPrincipal() {
   puts("5) Mostrar pacientes por prioridad");
   puts("6) Salir");
 }
+
+void ordenarPrioridad(List *listaPacientes)
+{
+  
+}
+
 
 void registrar_paciente(List *pacientes)
 {
@@ -74,41 +82,55 @@ void registrar_paciente(List *pacientes)
     } else
       pacienteActual = list_next(listaPacientes);
   }
-  
+  if (pacienteActual == NULL)
+  { 
+    strcpy(paciente->nombre, nombreIngresado);
+  }
+  printf("Ingresa la edad del paciente: \n");
+  scanf("%i", &paciente->edad);
+  printf("Ingresa el sintoma del paciente:\n");
+  getchar();
+  scanf(" %[^\n]", paciente->sintoma);
+  strMay(paciente->sintoma);
+  strMay(paciente->nombre);
+  paciente->prioridad = 1; 
+  time(&paciente->hora);
+  list_pushBack(listaPacientes, paciente);
+  totalPacientes += 1;
+  ordenarPrioridad(listaPacientes);
+  }
 }
 
 void mostrar_lista_pacientes(List *pacientes) {
-  // Mostrar pacientes en la cola de espera
   printf("Pacientes en espera: \n");
-  // Aquí implementarías la lógica para recorrer y mostrar los pacientes
+  
 }
 
 int main() {
   char opcion;
   List *pacientes =
-      list_create(); // puedes usar una lista para gestionar los pacientes
+      list_create(); 
 
   do {
     mostrarMenuPrincipal();
     printf("Ingrese su opción: ");
-    scanf(" %c", &opcion); // Nota el espacio antes de %c para consumir el
-                           // newline anterior
+    scanf(" %c", &opcion); 
 
     switch (opcion) {
     case '1':
       registrar_paciente(pacientes);
       break;
     case '2':
-      // Lógica para asignar prioridad
+     
       break;
     case '3':
       mostrar_lista_pacientes(pacientes);
       break;
     case '4':
-      // Lógica para atender al siguiente paciente
+     
       break;
     case '5':
-      // Lógica para mostrar pacientes por prioridad
+     
       break;
     case '6':
       puts("Saliendo del sistema de gestión hospitalaria...");
@@ -120,7 +142,7 @@ int main() {
 
   } while (opcion != '6');
 
-  // Liberar recursos, si es necesario
+ 
   list_clean(pacientes);
 
   return 0;
